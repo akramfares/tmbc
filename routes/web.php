@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return "Hello world";
 });
+
+Route::resource('comments', 'CommentController', ['only' => [
+    'index', 'show'
+]]);

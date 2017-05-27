@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        DB::table('comments')->insert([
+            'name' => str_random(10),
+            'comment' => 'This is my comment : '. str_random(10),
+            'level' => 0,
+        ]);
     }
 }
