@@ -11,9 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
+
         DB::table('comments')->insert([
-            'name' => str_random(10),
-            'comment' => 'This is my comment : '. str_random(10),
+            'name' => $faker->name,
+            'comment' => $faker->text,
             'level' => 0,
         ]);
     }
