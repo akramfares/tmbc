@@ -32,7 +32,7 @@ const app = new Vue({
     },
     methods: {
         submitComment: function () {
-            if($("#inputName").val() == "" && $("#inputComment").val() == "")
+            if($("#inputName").val() == "" || $("#inputComment").val() == "")
                 return;
             var that = this;
             $("#submitComment").prop("disabled", true);
@@ -45,8 +45,10 @@ const app = new Vue({
         }
     },
     created: function () {
+        $("#loader").show();
         var that = this;
         $.get( "/comments", function( data ) {
+            $("#loader").hide();
             $.each(data, function(index, value) {
                 that.comments.push(value);
             });

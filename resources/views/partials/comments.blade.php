@@ -1,5 +1,6 @@
-<h2 class="text-center" v-if="count > 0">Comments</h2>
+<h2 class="text-center">Comments</h2>
 <div id="list-comments">
+    <img src="{{ asset('img/loader.svg') }}" id="loader" class="center-block">
     <comment-list v-if="comments" :comments="comments"></comment-list>
 </div>
 

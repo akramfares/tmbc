@@ -1,5 +1,5 @@
 <template>
-    <form class="form-horizontal" action="#error" id="error">
+    <form class="form-horizontal">
       <div class="form-group">
         <div class="col-sm-2">
             <input required type="text" v-model="replyName" placeholder="Your name...">
@@ -8,7 +8,7 @@
           <input required type="text" v-model="replyComment" class="col-sm-10"  placeholder="Your comment...">
         </div>
         <div class="col-sm-2">
-          <button v-on:click="replyTo(comment)" type="submit" class="btn btn-default">Submit</button>
+          <button v-on:click="replyTo(comment, $event)" type="submit" class="btn btn-default">Submit</button>
         </div>
       </div>
 
@@ -26,15 +26,20 @@
             }
         },
         methods:{
-            replyTo(comment){
-                if(this.replyName == "" && this.replyComment == "")
-                                return;
+            replyTo(comment, event){
+                if(this.replyName == "" || this.replyComment == "") {
+                    alert("Please fill all form fields.");
+                    return;
+                }
                 var that = this;
-                $.post( "/comments", { name: this.replyName, comment: this.replyName, parent:comment.id  } ).done(function( data ) {
-                    this.replyName = '';
-                    this.replyComment = '';
-                    //that.comments.push(data);
+                $.post( "/comments", { name: this.replyName, comment: this.replyComment, parent:comment.id  } ).done(function( data ) {
+                    that.replyName = '';
+                    that.replyComment = '';
+                    that.comment.children.push(data);
+                    that.$parent.replyToComment = false;
                 });
+
+                if (event) event.preventDefault()
             }
         }
     }
