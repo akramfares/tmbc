@@ -18,6 +18,14 @@ class CommentController extends Controller
     {
         // Get all comments
         $comments = Comment::all();
+        return $comments;
+        $comments = $this->getCommentsTree($comments);
+
+        Log::info("Get all nested comments.");
+        return $comments;
+    }
+
+    public function getCommentsTree($comments) {
         $comments_by_id = new Collection;
 
         // Store comments in Collection

@@ -35,6 +35,9 @@
                 $.post( "/comments", { name: this.replyName, comment: this.replyComment, parent:comment.id  } ).done(function( data ) {
                     that.replyName = '';
                     that.replyComment = '';
+                    if (typeof that.comment.children == 'undefined') {
+                        that.comment.children = [];
+                    }
                     that.comment.children.push(data);
                     that.$parent.replyToComment = false;
                 });
