@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@section('title') Laravel 5 Sample Site @show</title>
+    <title>@section('title') TMBC Comments @show</title>
     @section('meta_keywords')
         <meta name="keywords" content="your, awesome, keywords, here"/>
     @show @section('meta_author')
@@ -14,6 +14,7 @@
         <meta name="description"
               content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei."/>
     @show
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -24,7 +25,7 @@
 <body>
 @include('partials.nav')
 
-<div class="container">
+<div class="container" id="app" style="margin-bottom: 40px">
     @yield('content')
 </div>
 

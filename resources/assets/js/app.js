@@ -15,8 +15,34 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('comment', require('./components/Comment.vue'));
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        comments: [],
+        count: 0
+    },
+    methods: {
+        submitComment: function () {
+            if($("#inputName").val() == "" && $("#inputComment").val() == "")
+                return;
+            var that = this;
+            $("#submitComment").prop("disabled", true);
+            $.post( "/comments", { name: $("#inputName").val(), comment: $("#inputComment").val() } ).done(function( data ) {
+                $("#inputName").val('');
+                $("#inputComment").val('');
+                that.comments.push(data);
+                $("#submitComment").prop("disabled", false);
+            });
+        }
+    },
+    created: function () {
+        var that = this;
+        $.get( "/comments", function( data ) {
+            that.comments = data;
+            that.count = data.length;
+        });
+    }
 });

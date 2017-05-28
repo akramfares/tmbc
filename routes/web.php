@@ -14,5 +14,5 @@
 Route::get('/', 'HomeController');
 
 Route::resource('comments', 'CommentController', ['only' => [
-    'index', 'show'
+    'index', 'store'
 ]]);

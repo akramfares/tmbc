@@ -14,7 +14,6 @@ class CommentController extends Controller
      */
     public function index()
     {
-
         $comments = Comment::all();
         return $comments;
     }
@@ -27,6 +26,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->name = $request->get("name");
+        $comment->comment = $request->get("comment");
+        $comment->level = 0;
+        $comment->save();
+
+        return $comment;
     }
 }
