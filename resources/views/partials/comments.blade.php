@@ -1,11 +1,6 @@
 <h2 class="text-center" v-if="count > 0">Comments</h2>
 <div id="list-comments">
-    <div
-            is="comment"
-            v-for="item in comments"
-            v-bind:key="item.id"
-            v-bind:comment="item"
-            ></div>
+    <comment-list v-if="comments" :comments="comments"></comment-list>
 </div>
 
 <h2 class="text-center">Add your comment</h2>

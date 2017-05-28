@@ -16,13 +16,19 @@ window.Vue = require('vue');
  */
 
 Vue.component('comment', require('./components/Comment.vue'));
+Vue.component('comment-list', require('./components/CommentList.vue'));
 
+let store = {
+    state: {
+        comments: [],
+        count: 0
+    }
+}
 
 const app = new Vue({
     el: '#app',
-    data: {
-        comments: [],
-        count: 0
+    data: function() {
+        return store.state
     },
     methods: {
         submitComment: function () {
@@ -41,7 +47,9 @@ const app = new Vue({
     created: function () {
         var that = this;
         $.get( "/comments", function( data ) {
-            that.comments = data;
+            $.each(data, function(index, value) {
+                that.comments.push(value);
+            });
             that.count = data.length;
         });
     }
