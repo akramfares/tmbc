@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class BrowserTest extends DuskTestCase
 {
@@ -66,8 +65,10 @@ class BrowserTest extends DuskTestCase
             $browser->waitFor('#comment-2');
             $browser->click('#comment-2 > div.media-body > p:nth-child(3) > a');
 
-            $browser->type('#comment-2 > div.media-body > form > div > div:nth-child(1) > input[type="text"]', 'Serena Williams');
-            $browser->type('#comment-2 > div.media-body > form > div > div.col-sm-8 > input', 'This is a second test reply');
+            $selector = '#comment-2 > div.media-body > form > div > div:nth-child(1) > input[type="text"]';
+            $browser->type($selector, 'Serena Williams');
+            $selector = '#comment-2 > div.media-body > form > div > div.col-sm-8 > input';
+            $browser->type($selector, 'This is a second test reply');
             $browser->click('#comment-2 > div.media-body > form > div > div:nth-child(3) > button');
             $browser->waitFor('#comment-3');
             $browser->assertVisible("#comment-3");
@@ -76,6 +77,4 @@ class BrowserTest extends DuskTestCase
             $browser->assertMissing("#comment-3 > div.media-body > p:nth-child(3) > a");
         });
     }
-
-
 }

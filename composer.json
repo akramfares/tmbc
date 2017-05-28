@@ -9,7 +9,8 @@
         "fzaninotto/faker": "^1.6",
         "laravel/dusk": "^1.1",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "squizlabs/php_codesniffer": "^3.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -42,7 +43,13 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
-        ]
+        ],
+        "test": "phpunit",
+        "test-browser": "php artisan dusk",
+        "test-feature": "phpunit --testsuite 'Feature Tests'",
+        "test-unit": "phpunit --testsuite 'Unit Tests'",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 app tests",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 app tests"
     },
     "config": {
         "preferred-install": "dist",
