@@ -20,6 +20,10 @@ $ composer test-feature
 $ composer test-browser
 ```
 
+Browser testing :
+
+http://g.recordit.co/TCDXgdax9A.gif
+
 ## Code quality
 
 I used PHP Code Sniffer to check code quality:
